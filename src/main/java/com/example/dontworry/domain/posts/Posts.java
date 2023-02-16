@@ -44,6 +44,4 @@ public class Posts {
     @Column(updatable = false)
     protected LocalDateTime createDate;
 
-    @LastModifiedDate
-    protected LocalDateTime lastModifiedDate;
 }
