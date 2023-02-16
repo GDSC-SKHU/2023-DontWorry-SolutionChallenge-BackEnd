@@ -19,6 +19,9 @@ repositories {
 }
 
 dependencies {
+// https://mvnrepository.com/artifact/org.springframework.security/spring-security-crypto
+    implementation group: 'org.springframework.security', name: 'spring-security-crypto', version: '5.7.6'
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
