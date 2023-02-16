@@ -17,7 +17,7 @@ public class User {
 
     @Id
     @Column(nullable = false)
-    private String id; // 유저의 아이디
+    private String userId; // 유저의 아이디
 
     @Column(nullable = false)
     private String password; // 패스워드
