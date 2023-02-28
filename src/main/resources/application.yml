@@ -22,7 +22,7 @@ spring:
     gcp:
       storage:
         credentials:
-          location: ${LOCATION}.json
+          location: ${LOCATION}
         project-id: ${PROJECT_ID}
         bucket: ${BUCKET}
   profiles:
