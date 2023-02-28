@@ -25,6 +25,8 @@ spring:
           location: ${LOCATION}.json
         project-id: ${PROJECT_ID}
         bucket: ${BUCKET}
+  profiles:
+    active:
 logging:
   level:
     org:
@@ -33,3 +35,9 @@ logging:
           http11: debug
 
 
+
+server:
+  servlet:
+    session:
+      cookie:
+        same-site: none # 세션ID가 담긴 쿠키의 same-site 설정을 none 으로 한다.
