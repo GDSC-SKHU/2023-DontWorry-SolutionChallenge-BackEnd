@@ -18,3 +18,18 @@ spring:
   sql:
     init:
       mode: always
+  cloud:
+    gcp:
+      storage:
+        credentials:
+          location: ${LOCATION}.json
+        project-id: ${PROJECT_ID}
+        bucket: ${BUCKET}
+logging:
+  level:
+    org:
+      apache:
+        coyote:
+          http11: debug
+
+
