@@ -1,23 +1,22 @@
 package com.example.dontworry.domain.posts;
 
+import com.example.dontworry.domain.BaseTimeEntity;
+import com.example.dontworry.domain.uploadFile.UploadFile;
 import com.example.dontworry.domain.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.List;
 
-@Data
+@Getter
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "posts")
-public class Posts {
+public class Posts extends BaseTimeEntity {
 
     @Id
     @Column(nullable = false)
@@ -30,18 +29,24 @@ public class Posts {
     @Column(nullable = false)
     private String category;
 
-    @Column()
-    private String image;
+    @Column
+    @JsonManagedReference
+    @OneToMany(mappedBy = "posts")
+    private List<UploadFile> imageFiles;
 
     @Column(nullable = false)
     private String mainText;
 
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate incidentDate;
+
     @ManyToOne
-    @JoinColumn(name = "userId") // 외래키
+    @JoinColumn(name = "user_id") // 외래키
     private User user;
 
-    @CreatedDate
-    @Column(updatable = false)
-    protected LocalDateTime createDate;
+
+    @Column(nullable = false)
+    private String location;
 
 }
