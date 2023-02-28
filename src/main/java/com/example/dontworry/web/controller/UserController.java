@@ -1,6 +1,5 @@
 package com.example.dontworry.web.controller;
 
-import com.example.dontworry.web.session.SessionConst;
 import com.example.dontworry.web.service.UserService;
 import com.example.dontworry.domain.user.User;
 import com.example.dontworry.web.dto.UserDto;
@@ -12,9 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 @Controller
