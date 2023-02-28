@@ -27,7 +27,7 @@ public class InitData {
                 .password(passwordEncoder.encode("s1234"))
                 .build();
         // 서비스를 이용해 리파지토리에 유저 저장
-        User registeredUser = userService.create(user);
+        userService.create(user);
 
     }
 }
