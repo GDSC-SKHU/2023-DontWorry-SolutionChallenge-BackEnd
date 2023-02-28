@@ -2,11 +2,9 @@ package com.example.dontworry.web.util;
 
 import com.example.dontworry.domain.posts.Posts;
 import com.example.dontworry.domain.uploadFile.UploadFile;
-import com.example.dontworry.domain.uploadFile.UploadFileRepository;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -24,8 +22,7 @@ public class FileHandler {
 
     private final Storage storage;
 
-    @Autowired
-    private UploadFileRepository uploadFileRepository;
+
     @Value("${spring.cloud.gcp.storage.bucket}")
     private String bucketName;
 
