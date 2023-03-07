@@ -2,8 +2,10 @@ package com.example.dontworry.web.controller;
 
 
 import com.example.dontworry.domain.posts.Posts;
+import com.example.dontworry.domain.uploadFile.UploadFile;
 import com.example.dontworry.domain.user.User;
 import com.example.dontworry.web.argumentresolver.Login;
+import com.example.dontworry.web.dto.PostsResDto;
 import com.example.dontworry.web.service.PostService;
 import com.example.dontworry.web.service.UploadFileService;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +44,8 @@ public class WriteController {
             @Valid @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
             @Login User loginMember
     ) throws Exception {
+        List<UploadFile> uploadFiles = uploadFileService.addBoardPictures(files);
+//        List<Category> categories = postService.createPostAndCategories(category);
         Posts posts = postService.addPosts(Posts.builder()
                 .user(loginMember)
                 .title(title)
@@ -49,15 +53,25 @@ public class WriteController {
                 .mainText(mainText)
                 .incidentDate(date)
                 .location(Location)
+                .files(uploadFiles)
                 .build());
 
-        uploadFileService.addBoardPictures(posts,files);
+        PostsResDto postsResDto = PostsResDto.builder()
+                .userId(loginMember.getUserId())
+                .title(posts.getTitle())
+                .category(posts.getCategory())
+                .mainText(posts.getMainText())
+                .location(posts.getLocation())
+                .imagesFiles(posts.getFiles())
+                .incidentDate(posts.getIncidentDate())
+                .build();
 
 
 
 
-        return ResponseEntity.ok().body("ok");
+        return ResponseEntity.ok().body(postsResDto);
     }
+
 
 
 
