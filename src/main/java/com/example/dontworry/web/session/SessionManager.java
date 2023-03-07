@@ -1,5 +1,6 @@
 package com.example.dontworry.web.session;
 
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.Cookie;
@@ -30,6 +31,8 @@ public class SessionManager {
 
         //쿠키 생성
         Cookie mySessionCookie = new Cookie(SESSION_COOKIE_NAME, sessionId);
+        mySessionCookie.setSecure(true);
+        mySessionCookie.setHttpOnly(true);
         response.addCookie(mySessionCookie);
     }
 
