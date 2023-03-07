@@ -29,7 +29,6 @@ public class FileHandler {
 
 
     public List<UploadFile> parseFileBoardPictureInfo(
-            Posts posts,
             List<MultipartFile> multipartFiles
     ) throws Exception{
         // 반환을 할 파일 리스트
@@ -46,7 +45,7 @@ public class FileHandler {
 
 
 
-        // 경로를 지정하고 그곳에다가 저장할 심산이다
+
         String path = "images/" + current_date;
         File file = new File(path);
 
@@ -60,7 +59,7 @@ public class FileHandler {
         for (MultipartFile multipartFile : multipartFiles){
             // 파일이 비어 있지 않을 때 작업을 시작해야 오류가 나지 않는다
             if(!multipartFile.isEmpty()){
-                // jpeg, png, gif 파일들만 받아서 처리할 예정
+                // jpeg, png 파일들만 받아서 처리할 예정
                 String contentType = multipartFile.getContentType();
                 String originalFileExtension;
                 // 확장자 명이 없으면 이 파일은 잘 못 된 것이다
@@ -74,9 +73,7 @@ public class FileHandler {
                     else if(contentType.contains("image/png")){
                         originalFileExtension = ".png";
                     }
-                    else if(contentType.contains("image/gif")){
-                        originalFileExtension = ".gif";
-                    }
+
                     // 다른 파일 명이면 아무 일 하지 않는다
                     else{
                         break;
@@ -96,7 +93,7 @@ public class FileHandler {
                         .uploadFileName(multipartFile.getOriginalFilename())
                         .storeFileName(blobInfo.getMediaLink())
                         .file_size(multipartFile.getSize())
-                        .posts(posts)
+
                         .build();
                 fileList.add(uploadFile);
 
