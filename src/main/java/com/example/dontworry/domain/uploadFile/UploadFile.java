@@ -25,15 +25,11 @@ public class UploadFile  {
 
     @Column
     private long file_size;
+
     @ManyToOne
-    @JoinColumn(name = "posts_id") // 외래키
+    @JoinColumn(name = "POST_ID",insertable = false,updatable = false)
     private Posts posts;
 
-    @Builder
-    public UploadFile(String uploadFileName, String storeFileName) {
-        this.uploadFileName = uploadFileName;
-        this.storeFileName = storeFileName;
-    }
 
 
 }
