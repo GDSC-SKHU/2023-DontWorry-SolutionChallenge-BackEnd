@@ -37,10 +37,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-//                .allowedOriginPatterns("*")
-                .allowedOrigins("https://dontworry.duckdns.org:3000","https://dontworry.duckdns.org","http://localhost:3000")
+                .allowedOriginPatterns("*")
+//                .allowedOrigins("https://dontworry.duckdns.org:3000","https://dontworry.duckdns.org","http://localhost:3000")
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
-                .allowedHeaders("*")
+//                .allowedHeaders("*")
                 .allowCredentials(true)
                 .maxAge(MAX_AGE_SECS);
     }
