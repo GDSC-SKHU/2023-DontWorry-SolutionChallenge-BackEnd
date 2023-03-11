@@ -30,7 +30,7 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginV4(@RequestBody UserDto dto, BindingResult bindingResult,
+    public ResponseEntity<?> login(@RequestBody UserDto dto, BindingResult bindingResult,
                                      HttpServletRequest request) {
 
         if (bindingResult.hasErrors()) {
