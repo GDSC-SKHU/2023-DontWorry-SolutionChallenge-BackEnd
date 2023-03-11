@@ -5,14 +5,7 @@ import static com.example.dontworry.domain.uploadFile.QUploadFile.uploadFile;
 
 import com.example.dontworry.domain.user.User;
 import com.example.dontworry.web.dto.MainResDto;
-import com.example.dontworry.web.dto.PostsResDto;
-import com.querydsl.core.Tuple;
-import com.querydsl.core.types.Expression;
-import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.Expressions;
-import com.querydsl.jpa.JPAExpressions;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

@@ -4,8 +4,6 @@ import com.example.dontworry.domain.BaseTimeEntity;
 //import com.example.dontworry.domain.category.Category;
 import com.example.dontworry.domain.uploadFile.UploadFile;
 import com.example.dontworry.domain.user.User;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,12 +11,11 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Entity
-@Builder
 @NoArgsConstructor
+@Builder
 @AllArgsConstructor
 public class Posts extends BaseTimeEntity {
 
@@ -51,5 +48,8 @@ public class Posts extends BaseTimeEntity {
 
     @Column(nullable = false)
     private String location;
+
+
+
 
 }

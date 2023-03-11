@@ -3,11 +3,8 @@ package com.example.dontworry.domain.uploadFile;
 import com.example.dontworry.domain.user.User;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +29,6 @@ public class UploadFileRepositoryCustomImpl implements UploadFileRepositoryCusto
                                 .and(posts.incidentDate.month().eq(incidentDate.getMonth()+1))
                                 .and(posts.incidentDate.year().eq(incidentDate.getYear()+1900))
                         )
-
                         .fetch()
 
         );
