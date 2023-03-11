@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -79,8 +80,8 @@ public class FileHandler {
                         break;
                     }
                 }
-                // 각 이름은 겹치면 안되므로 나노 초까지 동원하여 지정
-                String new_file_name = System.nanoTime() + originalFileExtension;
+                String uuid = UUID.randomUUID().toString();
+                String new_file_name = uuid + originalFileExtension;
 
                 BlobInfo blobInfo = storage.createFrom(
                         BlobInfo.newBuilder(bucketName, path + "/" + new_file_name)
@@ -88,10 +89,11 @@ public class FileHandler {
                                 .build(),
                         multipartFile.getInputStream()
                 );
+                String link = "https://storage.googleapis.com/"+ bucketName +"/"+ path +"/"+ new_file_name  ;
                 // 생성 후 리스트에 추가
                 UploadFile uploadFile = UploadFile.builder()
                         .uploadFileName(multipartFile.getOriginalFilename())
-                        .storeFileName(blobInfo.getMediaLink())
+                        .storeFileName(link)
                         .file_size(multipartFile.getSize())
 
                         .build();
