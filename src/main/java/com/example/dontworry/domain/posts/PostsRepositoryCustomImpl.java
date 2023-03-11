@@ -23,7 +23,7 @@ import java.util.Optional;
 public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
     @PersistenceContext
     private EntityManager entityManager;
-    JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
+    private final JPAQueryFactory jpaQueryFactory;
 
     @Override
     public Optional<List<LocalDate>> findByIncidentDate(User user1){
@@ -38,8 +38,8 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
     @Transactional
     @Override
     public Optional<List<MainResDto>> findAllByUser(User user){
-
-        return Optional.ofNullable( jpaQueryFactory
+        JPAQueryFactory jpaqf = new JPAQueryFactory(entityManager);
+        return Optional.ofNullable( jpaqf
                 .from(posts)
                 .groupBy(uploadFile.posts.id)
                 .select(Projections.fields(MainResDto.class,posts.title, posts.createdDate,
