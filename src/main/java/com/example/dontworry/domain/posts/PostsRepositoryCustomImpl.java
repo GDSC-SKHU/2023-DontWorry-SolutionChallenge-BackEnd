@@ -31,9 +31,9 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
     }
 
     @Override
-    public List<MainResDto> findAllByUser(User user){
+    public Optional<List<MainResDto>> findAllByUser(User user){
 
-        return jpaQueryFactory.
+        return Optional.ofNullable( jpaQueryFactory.
                 select(Projections.fields(MainResDto.class,posts.title, posts.createdDate,
                         uploadFile.storeFileName.coalesce(posts.mainText).as("storeFileName")
                 ))
@@ -42,7 +42,7 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
                 .on(posts.id.eq(uploadFile.posts.id))
                 .where(posts.user.eq(user))
                 .groupBy(posts.id)
-                .fetch();
+                .fetch());
 
     }
 

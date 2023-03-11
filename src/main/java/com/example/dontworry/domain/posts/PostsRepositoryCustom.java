@@ -12,6 +12,6 @@ import com.querydsl.core.Tuple;
 public interface PostsRepositoryCustom {
     Optional<List<LocalDate>> findByIncidentDate(User user);
 
-    List<MainResDto> findAllByUser(User user);
+    Optional<List<MainResDto>> findAllByUser(User user);
 
 }

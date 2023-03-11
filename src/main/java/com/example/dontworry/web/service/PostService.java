@@ -29,7 +29,7 @@ public class PostService {
 
 
 
-        return postsRepository.findAllByUser(user);
+        return postsRepository.findAllByUser(user).orElseThrow();
     }
 //
 //    public List<Category> createPostAndCategories(List<Category> list)  {
