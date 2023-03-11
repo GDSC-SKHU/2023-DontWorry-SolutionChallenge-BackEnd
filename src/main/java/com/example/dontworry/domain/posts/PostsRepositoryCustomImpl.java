@@ -33,15 +33,15 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
     @Override
     public Optional<List<MainResDto>> findAllByUser(User user){
 
-        return Optional.ofNullable( jpaQueryFactory.
-                select(Projections.fields(MainResDto.class,posts.title, posts.createdDate,
+        return Optional.ofNullable( jpaQueryFactory
+                .from(posts)
+                .groupBy(uploadFile.posts.id)
+                .select(Projections.fields(MainResDto.class,posts.title, posts.createdDate,
                         uploadFile.storeFileName.coalesce(posts.mainText).as("storeFileName")
                 ))
-                .from(posts)
                 .leftJoin(uploadFile)
                 .on(posts.id.eq(uploadFile.posts.id))
                 .where(posts.user.eq(user))
-                .groupBy(uploadFile.posts.id)
                 .fetch());
 
     }
