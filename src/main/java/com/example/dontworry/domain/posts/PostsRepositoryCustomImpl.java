@@ -24,7 +24,7 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
     @PersistenceContext
     private EntityManager entityManager;
     JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
-    @Transactional
+
     @Override
     public Optional<List<LocalDate>> findByIncidentDate(User user1){
         return Optional.ofNullable(
@@ -35,7 +35,7 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
                         .fetch()
         );
     }
-
+    @Transactional
     @Override
     public Optional<List<MainResDto>> findAllByUser(User user){
 
