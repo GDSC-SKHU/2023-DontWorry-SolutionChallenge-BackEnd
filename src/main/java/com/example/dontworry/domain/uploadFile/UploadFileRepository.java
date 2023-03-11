@@ -6,10 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UploadFileRepository extends JpaRepository<UploadFile,Long> {
-    UploadFile save(UploadFile uploadFile);
-    Optional<UploadFile> findById(Long id);
-
+public interface UploadFileRepository extends JpaRepository<UploadFile,Long> ,UploadFileRepositoryCustom{
 
 
 }
