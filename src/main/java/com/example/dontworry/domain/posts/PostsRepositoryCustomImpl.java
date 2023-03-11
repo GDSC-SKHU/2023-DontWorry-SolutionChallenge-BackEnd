@@ -3,9 +3,14 @@ package com.example.dontworry.domain.posts;
 import static com.example.dontworry.domain.posts.QPosts.posts;
 import static com.example.dontworry.domain.uploadFile.QUploadFile.uploadFile;
 
+import com.example.dontworry.domain.uploadFile.QUploadFile;
 import com.example.dontworry.domain.user.User;
 import com.example.dontworry.web.dto.MainResDto;
+import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.SubQueryExpression;
+import com.querydsl.core.types.dsl.CaseBuilder;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -39,16 +44,23 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
     @Override
     public Optional<List<MainResDto>> findAllByUser(User user){
         JPAQueryFactory jpaqf = new JPAQueryFactory(entityManager);
-        return Optional.ofNullable( jpaqf
+        List<MainResDto> mainResDtoList = jpaqf.select(
+                        Projections.fields(MainResDto.class, posts.id, posts.title, posts.category, posts.mainText, posts.incidentDate, posts.location, posts.createdDate,
+                                new CaseBuilder()
+                                        .when(uploadFile.storeFileName.isNotNull())
+                                        .then(uploadFile.storeFileName)
+                                        .otherwise(posts.mainText)
+                                        .as("storeFileName")
+                        )
+                )
                 .from(posts)
-                .groupBy(uploadFile.posts.id)
-                .select(Projections.fields(MainResDto.class,posts.title, posts.createdDate,
-                        uploadFile.storeFileName.coalesce(posts.mainText).as("storeFileName")
-                ))
-                .leftJoin(uploadFile)
-                .on(posts.id.eq(uploadFile.posts.id))
+                .leftJoin(posts.files, uploadFile)
+                .on(uploadFile.posts.id.eq(posts.id))
                 .where(posts.user.eq(user))
-                .fetch());
+                .groupBy(posts.id)
+                .fetch();
+
+        return Optional.ofNullable(mainResDtoList);
 
     }
 
