@@ -1,6 +1,6 @@
 package com.example.dontworry.domain.posts;
 
-import static com.example.dontworry.domain.posts.QPosts.*;
+import static com.example.dontworry.domain.posts.QPosts.posts;
 import static com.example.dontworry.domain.uploadFile.QUploadFile.uploadFile;
 
 import com.example.dontworry.domain.user.User;
