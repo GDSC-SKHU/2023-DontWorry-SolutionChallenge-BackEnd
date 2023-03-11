@@ -25,11 +25,11 @@ public class PostService {
 
     public List<MainResDto> findAllByUser(User user) {
 
-        List<MainResDto> results = postsRepository.findAllByUser(user);
 
 
 
-        return results;
+
+        return postsRepository.findAllByUser(user);
     }
 //
 //    public List<Category> createPostAndCategories(List<Category> list)  {
