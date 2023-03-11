@@ -9,8 +9,11 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +21,10 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
-    private final JPAQueryFactory jpaQueryFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
+    JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
+    @Transactional
     @Override
     public Optional<List<LocalDate>> findByIncidentDate(User user1){
         return Optional.ofNullable(
