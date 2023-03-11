@@ -9,9 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Getter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class MainResDto {
     private String title;
     private LocalDate createdDate;
