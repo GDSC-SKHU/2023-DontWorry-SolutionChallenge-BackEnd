@@ -57,7 +57,7 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
                 .leftJoin(posts.files, uploadFile)
                 .on(uploadFile.posts.id.eq(posts.id))
                 .where(posts.user.eq(user))
-                .groupBy(posts.id)
+                .groupBy(posts.id,posts.createdDate,posts.title)
                 .fetch();
 
         return Optional.ofNullable(mainResDtoList);
