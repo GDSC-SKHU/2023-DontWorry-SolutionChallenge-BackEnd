@@ -3,31 +3,24 @@ package com.example.dontworry.domain.posts;
 import static com.example.dontworry.domain.posts.QPosts.posts;
 import static com.example.dontworry.domain.uploadFile.QUploadFile.uploadFile;
 
-import com.example.dontworry.domain.uploadFile.QUploadFile;
 import com.example.dontworry.domain.user.User;
 import com.example.dontworry.web.dto.MainResDto;
-import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.SubQueryExpression;
-import com.querydsl.core.types.dsl.CaseBuilder;
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import static com.querydsl.core.group.GroupBy.groupBy;
+import static com.querydsl.core.group.GroupBy.list;
 
 @Repository
 @RequiredArgsConstructor
 public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
-    @PersistenceContext
-    private EntityManager entityManager;
+
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
@@ -40,28 +33,32 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
                         .fetch()
         );
     }
-    @Transactional
     @Override
-    public Optional<List<MainResDto>> findAllByUser(User user){
-        JPAQueryFactory jpaqf = new JPAQueryFactory(entityManager);
-        List<MainResDto> mainResDtoList = jpaqf.select(
-                        Projections.fields(MainResDto.class, posts.id, posts.title, posts.category, posts.mainText, posts.incidentDate, posts.location, posts.createdDate,
-                                new CaseBuilder()
-                                        .when(uploadFile.storeFileName.isNotNull())
-                                        .then(uploadFile.storeFileName)
-                                        .otherwise(posts.mainText)
-                                        .as("storeFileName")
-                        )
-                )
+    public Optional<MainResDto> findAllByUser(User user,Long id){
+        return Optional.ofNullable( jpaQueryFactory
                 .from(posts)
-                .leftJoin(posts.files, uploadFile)
-                .on(uploadFile.posts.id.eq(posts.id))
-                .where(posts.user.eq(user))
-                .groupBy(posts.id,posts.createdDate,posts.title)
-                .fetch();
+                .select(Projections.fields(MainResDto.class,posts.title, posts.createdDate,
+                        uploadFile.storeFileName.coalesce(posts.mainText).as("storeFileName")
+                ))
+                .leftJoin(uploadFile)
+                .on(posts.id.eq(uploadFile.posts.id))
+                .where(posts.user.eq(user)
+                        .and(posts.id.eq(id)))
+                .fetchFirst());
 
-        return Optional.ofNullable(mainResDtoList);
 
+    }
+
+    @Override
+    public Optional<List<Long>> SearchAllById(User user){
+        return Optional.ofNullable(
+                jpaQueryFactory
+                        .select(posts.id)
+                        .from(posts)
+                        .where(posts.user.eq(user))
+                        .orderBy(posts.id.desc())
+                        .fetch()
+        );
     }
 
 }
