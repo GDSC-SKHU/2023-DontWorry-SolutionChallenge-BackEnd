@@ -9,6 +9,8 @@ import com.example.dontworry.web.dto.MainResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Member;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,11 +27,15 @@ public class PostService {
 
     public List<MainResDto> findAllByUser(User user) {
 
+        List<Long> allById = postsRepository.SearchAllById(user).orElseThrow();
 
+        List<MainResDto> result = new ArrayList<>();
 
-
-
-        return postsRepository.findAllByUser(user).orElseThrow();
+        for (Long id : allById){
+            MainResDto mainResDto = postsRepository.findAllByUser(user,id).orElseThrow();
+            result.add(mainResDto);
+        }
+        return result;
     }
 //
 //    public List<Category> createPostAndCategories(List<Category> list)  {
