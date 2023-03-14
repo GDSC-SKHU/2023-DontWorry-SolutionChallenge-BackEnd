@@ -1,7 +1,7 @@
 package com.example.dontworry.domain.posts;
 
 import com.example.dontworry.domain.BaseTimeEntity;
-//import com.example.dontworry.domain.category.Category;
+import com.example.dontworry.domain.category.Category;
 import com.example.dontworry.domain.uploadFile.UploadFile;
 import com.example.dontworry.domain.user.User;
 import lombok.*;
@@ -27,8 +27,9 @@ public class Posts extends BaseTimeEntity {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false, name ="category")
-    private String category;
+    @OneToMany
+    @JoinColumn(name = "POST_ID")
+    private List<Category> category =new ArrayList<>();
 
     @OneToMany
     @JoinColumn(name = "POST_ID")

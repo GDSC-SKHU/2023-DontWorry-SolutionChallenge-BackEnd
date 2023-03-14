@@ -1,5 +1,7 @@
 package com.example.dontworry.web.dto;
 
+//import com.example.dontworry.domain.category.Category;
+import com.example.dontworry.domain.category.Category;
 import com.example.dontworry.domain.uploadFile.UploadFile;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PostsResDto {
     private String title;
-    private String category;
+    private List<Category> category;
     private String mainText;
     private String userId;
     private String location;

@@ -1,23 +1,24 @@
 package com.example.dontworry.web.controller;
 
 
+//import com.example.dontworry.domain.category.Category;
+import com.example.dontworry.domain.category.Category;
 import com.example.dontworry.domain.posts.Posts;
 import com.example.dontworry.domain.uploadFile.UploadFile;
 import com.example.dontworry.domain.user.User;
 import com.example.dontworry.web.argumentresolver.Login;
+import com.example.dontworry.web.dto.PostsReqDto;
 import com.example.dontworry.web.dto.PostsResDto;
+import com.example.dontworry.web.service.CategoryService;
 import com.example.dontworry.web.service.PostService;
 import com.example.dontworry.web.service.UploadFileService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -26,33 +27,29 @@ import java.util.List;
 public class WriteController {
 
 
-    @Autowired
-    private UploadFileService uploadFileService;
+    private final UploadFileService uploadFileService;
 
 
-    @Autowired
-    private PostService postService;
 
+    private final PostService postService;
+
+    private final CategoryService categoryService;
 
     @PostMapping("/write")
-    public ResponseEntity<?> saveItem(
+    public ResponseEntity<?> write(
+            @Valid @RequestPart PostsReqDto reqDto,
             @Valid @RequestParam("files") List<MultipartFile> files,
-            @Valid @RequestParam("title") String title,
-            @Valid @RequestParam("category") String category,
-            @Valid @RequestParam("mainText") String mainText,
-            @Valid @RequestParam("location") String Location,
-            @Valid @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
             @Login User loginMember
     ) throws Exception {
-        List<UploadFile> uploadFiles = uploadFileService.addBoardPictures(files);
-//        List<Category> categories = postService.createPostAndCategories(category);
+        List<UploadFile> uploadFiles = uploadFileService.addUploadFile(files);
+        List<Category> categories = categoryService.addCategory(reqDto.getCategory());
         Posts posts = postService.addPosts(Posts.builder()
                 .user(loginMember)
-                .title(title)
-                .category(category)
-                .mainText(mainText)
-                .incidentDate(date)
-                .location(Location)
+                .title(reqDto.getTitle())
+                .category(categories)
+                .mainText(reqDto.getMainText())
+                .incidentDate(reqDto.getIncidentDate())
+                .location(reqDto.getLocation())
                 .files(uploadFiles)
                 .build());
 
