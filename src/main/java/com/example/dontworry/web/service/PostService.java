@@ -38,16 +38,29 @@ public class PostService {
     }
 
     public List<MainResDto> searchAllByIdAndCategory(User user, String Category){
-        List<Long> allById = postsRepository.SearchAllById(user).orElseThrow();
+        List<Long> allById = postsRepository.SearchAllByIdAndCategory(user,Category).orElseThrow();
 
         List<MainResDto> result = new ArrayList<>();
 
         for (Long id : allById){
-            MainResDto mainResDto = postsRepository.searchAllByIdAndCategory(user,Category,id).orElseThrow();
+            MainResDto mainResDto = postsRepository.findAllByUser(user,id).orElseThrow();
             result.add(mainResDto);
         }
         return result;
     }
+
+    public List<MainResDto> searchAllByIdAndTitle(User user, String title){
+        List<Long> allById = postsRepository.SearchAllByIdAndTitle(user,title).orElseThrow();
+
+        List<MainResDto> result = new ArrayList<>();
+
+        for (Long id : allById){
+            MainResDto mainResDto = postsRepository.findAllByUser(user,id).orElseThrow();
+            result.add(mainResDto);
+        }
+        return result;
+    }
+
 
 
 //

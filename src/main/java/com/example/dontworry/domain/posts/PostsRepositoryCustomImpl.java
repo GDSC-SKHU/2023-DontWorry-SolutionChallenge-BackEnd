@@ -60,23 +60,34 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
                         .fetch()
         );
     }
+
     @Override
-    public Optional<MainResDto> searchAllByIdAndCategory(User user, String Category, Long id){
+    public Optional<List<Long>> SearchAllByIdAndCategory(User user,String category1){
         return Optional.ofNullable(
                 jpaQueryFactory
+                        .select(posts.id)
                         .from(posts)
-                        .select(Projections.fields(MainResDto.class,posts.title, posts.createdDate,
-                                uploadFile.storeFileName.coalesce(posts.mainText).as("storeFileName")
-                        ))
-                        .leftJoin(uploadFile)
-                        .on(posts.id.eq(uploadFile.posts.id))
                         .leftJoin(category)
                         .on(posts.id.eq(category.posts.id))
                         .where(posts.user.eq(user)
-                                .and(category.categoryName.contains(Category))
-                                .and(posts.id.eq(id)))
-                        .fetchFirst());
-
+                                .and(category.categoryName.contains(category1)))
+                        .orderBy(posts.id.desc())
+                        .fetch()
+        );
     }
+    @Override
+    public Optional<List<Long>> SearchAllByIdAndTitle(User user,String title){
+        return Optional.ofNullable(
+                jpaQueryFactory
+                        .select(posts.id)
+                        .from(posts)
+                        .where(posts.user.eq(user)
+                                .and(posts.title.contains(title)))
+                        .orderBy(posts.id.desc())
+                        .fetch()
+        );
+    }
+
+
 
 }

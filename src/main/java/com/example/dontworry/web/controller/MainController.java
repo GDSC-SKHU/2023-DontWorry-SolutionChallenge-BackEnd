@@ -24,9 +24,15 @@ public class MainController {
         return ResponseEntity.ok().body(posts);
     }
 
-    @GetMapping("/main/{category}")
+    @GetMapping("/main/category/{category}")
     public ResponseEntity<?> mainByCategory(@Login User user,@PathVariable String category){
         List<MainResDto> posts = postService.searchAllByIdAndCategory(user,category);
+        return ResponseEntity.ok().body(posts);
+    }
+
+    @GetMapping("/main/title/{title}")
+    public ResponseEntity<?> mainByTitle(@Login User user,@PathVariable String title){
+        List<MainResDto> posts = postService.searchAllByIdAndTitle(user,title);
         return ResponseEntity.ok().body(posts);
     }
 }
