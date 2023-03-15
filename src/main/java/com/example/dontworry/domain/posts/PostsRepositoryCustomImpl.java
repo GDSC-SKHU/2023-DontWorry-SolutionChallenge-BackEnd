@@ -2,7 +2,7 @@ package com.example.dontworry.domain.posts;
 
 import static com.example.dontworry.domain.posts.QPosts.posts;
 import static com.example.dontworry.domain.uploadFile.QUploadFile.uploadFile;
-
+import static com.example.dontworry.domain.category.QCategory.category;
 import com.example.dontworry.domain.user.User;
 import com.example.dontworry.web.dto.MainResDto;
 import com.querydsl.core.types.Projections;
@@ -59,6 +59,24 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
                         .orderBy(posts.id.desc())
                         .fetch()
         );
+    }
+    @Override
+    public Optional<MainResDto> searchAllByIdAndCategory(User user, String Category, Long id){
+        return Optional.ofNullable(
+                jpaQueryFactory
+                        .from(posts)
+                        .select(Projections.fields(MainResDto.class,posts.title, posts.createdDate,
+                                uploadFile.storeFileName.coalesce(posts.mainText).as("storeFileName")
+                        ))
+                        .leftJoin(uploadFile)
+                        .on(posts.id.eq(uploadFile.posts.id))
+                        .leftJoin(category)
+                        .on(posts.id.eq(category.posts.id))
+                        .where(posts.user.eq(user)
+                                .and(category.categoryName.contains(Category))
+                                .and(posts.id.eq(id)))
+                        .fetchFirst());
+
     }
 
 }

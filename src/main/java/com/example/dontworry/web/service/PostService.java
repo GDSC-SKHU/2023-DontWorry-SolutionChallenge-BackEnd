@@ -9,7 +9,6 @@ import com.example.dontworry.web.dto.MainResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,19 +36,33 @@ public class PostService {
         }
         return result;
     }
+
+    public List<MainResDto> searchAllByIdAndCategory(User user, String Category){
+        List<Long> allById = postsRepository.SearchAllById(user).orElseThrow();
+
+        List<MainResDto> result = new ArrayList<>();
+
+        for (Long id : allById){
+            MainResDto mainResDto = postsRepository.searchAllByIdAndCategory(user,Category,id).orElseThrow();
+            result.add(mainResDto);
+        }
+        return result;
+    }
+
+
 //
-//    public List<Category> createPostAndCategories(List<Category> list)  {
+//    public List<Category> createPostAndCategories(List<String> list) {
 //
 //            List<Category> categories = new ArrayList<>();
 //
-//            for(Category category : list) {
-//                Category category1 = Category.builder()
-//                        .categoryName(category.getCategoryName())
+//            for(String categoryName : list) {
+//                Category category = Category.builder()
+//                        .categoryName(categoryName)
 //                        .build();
 //
-//                categories.add(categoryRepository.save(category1));
+//                categories.addCategory(category);
 //            }
 //
 //            return categories;
-//        }
+//    }
 }

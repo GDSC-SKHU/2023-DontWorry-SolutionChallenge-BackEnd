@@ -14,4 +14,5 @@ public interface PostsRepositoryCustom {
 
     Optional<List<Long>> SearchAllById(User user);
 
+    Optional<MainResDto> searchAllByIdAndCategory(User user, String Category, Long id);
 }
