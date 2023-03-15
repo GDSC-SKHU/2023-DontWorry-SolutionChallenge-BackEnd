@@ -32,7 +32,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(2)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/", "/signup", "/login", "/index",
-                        "/css/**", "/*.ico", "/error","/help","/help/**");
+                        "/css/**", "/*.ico", "/error","/help","/help/**"
+                        ,"/law","/law/**");
     }
     @Override
     public void addCorsMappings(CorsRegistry registry) {
