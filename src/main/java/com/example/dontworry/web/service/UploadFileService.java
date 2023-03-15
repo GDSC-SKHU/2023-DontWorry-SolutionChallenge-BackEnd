@@ -1,6 +1,5 @@
 package com.example.dontworry.web.service;
 
-import com.example.dontworry.domain.posts.Posts;
 import com.example.dontworry.domain.uploadFile.UploadFile;
 import com.example.dontworry.domain.uploadFile.UploadFileRepository;
 
@@ -18,7 +17,7 @@ public class UploadFileService {
     private FileHandler fileHandler;
     @Autowired
     private UploadFileRepository uploadFileRepository;
-    public List<UploadFile> addBoardPictures(
+    public List<UploadFile> addUploadFile(
             List<MultipartFile> files
 
     ) throws Exception {
