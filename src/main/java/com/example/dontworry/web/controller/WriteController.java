@@ -1,7 +1,6 @@
 package com.example.dontworry.web.controller;
 
 
-//import com.example.dontworry.domain.category.Category;
 import com.example.dontworry.domain.category.Category;
 import com.example.dontworry.domain.posts.Posts;
 import com.example.dontworry.domain.uploadFile.UploadFile;
@@ -37,11 +36,10 @@ public class WriteController {
 
     @PostMapping("/write")
     public ResponseEntity<?> write(
-            @Valid @RequestPart PostsReqDto reqDto,
-            @Valid @RequestParam("files") List<MultipartFile> files,
+            @Valid @ModelAttribute PostsReqDto reqDto,
             @Login User loginMember
     ) throws Exception {
-        List<UploadFile> uploadFiles = uploadFileService.addUploadFile(files);
+        List<UploadFile> uploadFiles = uploadFileService.addUploadFile(reqDto.getFiles());
         List<Category> categories = categoryService.addCategory(reqDto.getCategory());
         Posts posts = postService.addPosts(Posts.builder()
                 .user(loginMember)

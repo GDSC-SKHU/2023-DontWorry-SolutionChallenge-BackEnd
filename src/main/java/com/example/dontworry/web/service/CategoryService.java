@@ -14,7 +14,7 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
     public List<Category> addCategory(
-            List<Category> categories
+            List<String> categories
 
     ) throws Exception {
         List<Category> categoryList =new ArrayList<>();
@@ -24,9 +24,9 @@ public class CategoryService {
         }
 
 
-        for(Category category : categories) {
+        for(String category : categories) {
             Category category1 = Category.builder()
-                    .categoryName(category.getCategoryName())
+                    .categoryName(category)
                     .build();
             categoryList.add(categoryRepository.save(category1));
         }

@@ -21,7 +21,6 @@ public class UploadFileService {
             List<MultipartFile> files
 
     ) throws Exception {
-        // 파일을 저장하고 그 BoardPicture 에 대한 list 를 가지고 있는다
         List<UploadFile> list = fileHandler.parseFileBoardPictureInfo(files);
 
         List<UploadFile> uploadFiles = new ArrayList<>();

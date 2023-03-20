@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -18,11 +19,11 @@ import java.util.List;
 @AllArgsConstructor
 public class PostsResDto {
     private String title;
-    private List<Category> category;
+    private List<Category> category=new ArrayList<>();
     private String mainText;
     private String userId;
     private String location;
-    private List<UploadFile> imagesFiles;
+    private List<UploadFile> imagesFiles =new ArrayList<>();
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate incidentDate;
 
