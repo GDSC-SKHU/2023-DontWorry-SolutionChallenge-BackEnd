@@ -6,6 +6,7 @@ import com.example.dontworry.domain.posts.Posts;
 import com.example.dontworry.domain.posts.PostsRepository;
 import com.example.dontworry.domain.user.User;
 import com.example.dontworry.web.dto.MainResDto;
+import com.example.dontworry.web.dto.PostDetailReqDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +60,11 @@ public class PostService {
             result.add(mainResDto);
         }
         return result;
+    }
+
+    public PostDetailReqDto searchById(User user, Long id){
+
+        return postsRepository.SearchById(user,id).orElseThrow();
     }
 
 

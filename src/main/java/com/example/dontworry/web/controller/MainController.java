@@ -1,8 +1,10 @@
 package com.example.dontworry.web.controller;
 
+import com.example.dontworry.domain.posts.Posts;
 import com.example.dontworry.domain.user.User;
 import com.example.dontworry.web.argumentresolver.Login;
 import com.example.dontworry.web.dto.MainResDto;
+import com.example.dontworry.web.dto.PostDetailReqDto;
 import com.example.dontworry.web.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +35,12 @@ public class MainController {
     @GetMapping("/main/title/{title}")
     public ResponseEntity<?> mainByTitle(@Login User user,@PathVariable String title){
         List<MainResDto> posts = postService.searchAllByIdAndTitle(user,title);
+        return ResponseEntity.ok().body(posts);
+    }
+
+    @GetMapping("/main/detail/{id}")
+    public ResponseEntity<?> mainById(@Login User user, @PathVariable("id") Long id){
+        PostDetailReqDto posts = postService.searchById(user,id);
         return ResponseEntity.ok().body(posts);
     }
 }
