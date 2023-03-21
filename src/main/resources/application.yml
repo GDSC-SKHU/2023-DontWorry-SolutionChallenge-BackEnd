@@ -7,8 +7,6 @@ spring:
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    hibernate:
-      ddl-auto: create
     show-sql: true
     properties:
       hibernate:
@@ -23,10 +21,8 @@ spring:
       storage:
         credentials:
           location: ${LOCATION}
-        project-id: ${PROJECT_ID}
         bucket: ${BUCKET}
-  profiles:
-    active:
+        project-id: ${PROJECT_ID}
 logging:
   level:
     org:
@@ -34,10 +30,32 @@ logging:
         coyote:
           http11: debug
 
+---
 
 
 server:
+  port: 8443
   servlet:
     session:
       cookie:
         same-site: none # 세션ID가 담긴 쿠키의 same-site 설정을 none 으로 한다.
+spring:
+  profiles:
+    active: pro
+  jpa:
+    hibernate:
+      ddl-auto: validate
+---
+
+server:
+  port: 8080
+  servlet:
+    session:
+      cookie:
+        same-site: none # 세션ID가 담긴 쿠키의 same-site 설정을 none 으로 한다.
+spring:
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: create
