@@ -23,7 +23,7 @@ public class PostsResDto {
     private String mainText;
     private String userId;
     private String location;
-    private List<UploadFile> imagesFiles =new ArrayList<>();
+    private List<UploadFile> files =new ArrayList<>();
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate incidentDate;
 
