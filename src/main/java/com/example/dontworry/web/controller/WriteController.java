@@ -57,7 +57,7 @@ public class WriteController {
                 .category(posts.getCategory())
                 .mainText(posts.getMainText())
                 .location(posts.getLocation())
-                .imagesFiles(posts.getFiles())
+                .files(posts.getFiles())
                 .incidentDate(posts.getIncidentDate())
                 .build();
 
