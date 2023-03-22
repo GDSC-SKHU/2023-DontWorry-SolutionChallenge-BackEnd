@@ -45,11 +45,7 @@ public class FileHandler {
 
 
         String path = "images/" + current_date;
-        File file = new File(path);
 
-        if(!file.exists()){
-            file.mkdirs();
-        }
 
 
         for (MultipartFile multipartFile : multipartFiles){
