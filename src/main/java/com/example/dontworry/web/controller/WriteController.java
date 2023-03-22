@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -39,7 +40,16 @@ public class WriteController {
             @Valid @ModelAttribute PostsReqDto reqDto,
             @Login User loginMember
     ) throws Exception {
-        List<UploadFile> uploadFiles = uploadFileService.addUploadFile(reqDto.getFiles());
+
+        System.out.println("abs"+reqDto.getFiles());
+        List<UploadFile> uploadFiles = new ArrayList<>();
+        List<MultipartFile> multipartFiles = new ArrayList<>();
+        if (reqDto.getFiles() ==null){
+            uploadFiles = uploadFileService.addUploadFile(multipartFiles) ;
+        } else {
+            uploadFiles = uploadFileService.addUploadFile(reqDto.getFiles());
+        }
+
         List<Category> categories = categoryService.addCategory(reqDto.getCategory());
         Posts posts = postService.addPosts(Posts.builder()
                 .user(loginMember)
