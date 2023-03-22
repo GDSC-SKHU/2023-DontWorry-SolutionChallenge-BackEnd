@@ -41,7 +41,7 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
         return Optional.ofNullable( jpaQueryFactory
                 .from(posts)
                 .select(Projections.fields(MainResDto.class,posts.title, posts.createdDate,
-                        uploadFile.storeFileName,posts.mainText,posts.incidentDate
+                        uploadFile.storeFileName,posts.mainText,posts.incidentDate,posts.id.as("postId")
                 ))
                 .leftJoin(uploadFile)
                 .on(posts.id.eq(uploadFile.posts.id))

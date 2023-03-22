@@ -16,4 +16,5 @@ public class MainResDto {
     private String storeFileName;
     private String mainText;
     private LocalDate incidentDate;
+    private Long postId;
 }
