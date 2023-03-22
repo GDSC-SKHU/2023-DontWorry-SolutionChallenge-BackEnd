@@ -1,6 +1,7 @@
 package com.example.dontworry.web.session;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,10 +14,10 @@ import java.util.Date;
 public class SessionInfoController {
 
     @GetMapping("/session-info")
-    public String sessionInfo(HttpServletRequest request) {
+    public ResponseEntity<?> sessionInfo(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null) {
-            return "세션이 없습니다.";
+            return ResponseEntity.badRequest().body("세션 비어있음");
         }
 
         //세션 데이터 출력
@@ -29,7 +30,7 @@ public class SessionInfoController {
         log.info("lastAccessedTime={}", new Date(session.getLastAccessedTime()));
         log.info("isNew={}", session.isNew());
 
-        return "세션 출력";
+        return ResponseEntity.ok().body(session.getId());
 
     }
 }
