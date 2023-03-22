@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Builder
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Law {
     @Id
     @Column(nullable = false)
