@@ -24,4 +24,6 @@ public class PostDetailReqDto {
     private List<String> storeFileName= new ArrayList<>();
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate incidentDate;
+
+    private Long id;
 }
