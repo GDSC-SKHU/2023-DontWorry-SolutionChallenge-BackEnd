@@ -121,6 +121,7 @@ public class PostsRepositoryCustomImpl implements PostsRepositoryCustom{
                 .location(posts1.getLocation())
                 .mainText(posts1.getMainText())
                 .title(posts1.getTitle())
+                .createdDate(posts1.getCreatedDate())
                 .id(posts1.getId())
                 .build();
 

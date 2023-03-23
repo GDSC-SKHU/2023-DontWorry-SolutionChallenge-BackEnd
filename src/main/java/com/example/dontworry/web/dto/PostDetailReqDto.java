@@ -18,12 +18,14 @@ import java.util.List;
 @AllArgsConstructor
 public class PostDetailReqDto {
     private String title;
+
     private List<String> categoryName = new ArrayList<>();
     private String mainText;
     private String location;
     private List<String> storeFileName= new ArrayList<>();
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate incidentDate;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate createdDate;
     private Long id;
 }
