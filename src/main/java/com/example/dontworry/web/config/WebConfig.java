@@ -15,7 +15,7 @@ import java.util.List;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    private final long MAX_AGE_SECS = 3600000;
+    private final long MAX_AGE_SECS = 600;
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(new LoginMemberArgumentResolver());
