@@ -1,6 +1,7 @@
 package com.example.dontworry;
 
 import com.example.dontworry.domain.help.Help;
+import com.example.dontworry.domain.law.Law;
 import com.example.dontworry.domain.posts.Posts;
 import com.example.dontworry.web.service.UserService;
 import com.example.dontworry.domain.user.User;
@@ -142,6 +143,59 @@ public class InitData {
                 .build();
         em.persist(japanHelp5);
 
+
+        //한국
+        Help koreaHelp1 = Help.builder()
+                .number("117")
+                .summary("전국에서 발생되는 학교폭력 및 성폭력 등 피해자 신고를 접수하여, 즉시 긴급구조, \n" +
+                        "수사지시, One-Stop 또는 NGO 단체 연계 업무를 진행합니다.")
+                .countryName("KOREA")
+                .build();
+        em.persist(koreaHelp1);
+
+        Help koreaHelp2 = Help.builder()
+                .number("117")
+                .summary("117 학교폭력 신고센터 문자 신고 번호(요금 무료)")
+                .countryName("KOREA")
+                .build();
+        em.persist(koreaHelp2);
+
+        Help koreaHelp3 = Help.builder()
+                .number("117")
+                .summary("학교폭력을 당했을 경우, 주저하지 말고 관할 경찰서에 신고를 합니다.")
+                .countryName("KOREA")
+                .build();
+        em.persist(koreaHelp3);
+
+        Help koreaHelp4 = Help.builder()
+                .number("117")
+                .summary("탈골, 기도 막힘이나 그 밖의 위급사항이라고 판단된 경우 즉시 119에 도움을 청합니다.")
+                .countryName("KOREA")
+                .build();
+        em.persist(koreaHelp4);
+
+        Help koreaHelp5 = Help.builder()
+                .number("117")
+                .summary("학교폭력 전화상담, 인터넷 상담, 개인 및 집단상담.")
+                .countryName("KOREA")
+                .build();
+        em.persist(koreaHelp5);
+
+        Help koreaHelp6 = Help.builder()
+                .number("담임선생님 또는 학교 내 선생님과 상담")
+                .summary("누군가에게 털어놓는 다는 것은 커다란 의지가 될 수도 있습니다.")
+                .countryName("KOREA")
+                .build();
+        em.persist(koreaHelp6);
+
+
+//        //중국 LAW
+//        Law chinaLaw = Law.builder()
+//                .form("差別、排斥、冷遇、無視、侮辱、いじめ、暴力などの形態を帯びる。")
+//                .policy("重大事態への対処 : 自殺、深刻な心身の傷害や金品の損失を及ぼした場合、規定で法の加重値が増加する。")
+//                .lawName("強制わいせつ、傷害、暴行、強要、窃盗、恐喝、器物損壊に該当する学校暴力犯罪は刑法で扱う")
+//                .
+//                .build()
 
         tx.commit();
         em.close();
