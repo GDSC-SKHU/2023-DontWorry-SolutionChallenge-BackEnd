@@ -1,8 +1,11 @@
 package com.example.dontworry.domain.law;
 
+import com.example.dontworry.domain.category.Category;
+import com.example.dontworry.domain.punishment.Punishment;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Builder
@@ -22,8 +25,9 @@ public class Law {
     @Column
     private String lawName;
 
-    @Column
-    private String punishment;
+    @OneToMany
+    @JoinColumn(name = "LAW_ID")
+    private List<Punishment> punishments;
     @Column
     private String resolutionProcedures;
     @Column
