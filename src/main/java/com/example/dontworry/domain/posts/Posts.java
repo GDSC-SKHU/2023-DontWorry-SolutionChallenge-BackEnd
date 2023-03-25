@@ -29,16 +29,16 @@ public class Posts extends BaseTimeEntity {
 
     @OneToMany
     @JoinColumn(name = "POST_ID")
-    private List<Category> category =new ArrayList<>();
+    private List<Category> category;
 
     @OneToMany
     @JoinColumn(name = "POST_ID")
-    private List<UploadFile> files = new ArrayList<>();
+    private List<UploadFile> files;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 3000)
     private String mainText;
 
-    @Column(nullable = false)
+    @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate incidentDate;
 
