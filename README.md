@@ -10,7 +10,7 @@
 
 "Our goal is to put an end to school violence and strive for the eradication of the problem of school violence."
 
-### TABLE
+## TABLE
 ![image](https://user-images.githubusercontent.com/80959635/228001005-939c6a02-70b5-4236-a56b-7c683ef33bf8.png)
 
 
@@ -19,12 +19,12 @@
 #### BACK : MyoungJin Seo
 
 
-### Technologies Used
+## Technologies Used
 - Spring Boot 2.7.8
 - JDK 11
 - Spring JPA 
 - MySQL
 
-### Google stack
+## Google stack
 - Google cloud Storage
 - Google Cloud Platform
