@@ -15,7 +15,7 @@
 
 
 ## MEMBER 
-#### FRONT :  
+#### FRONT : SeulHee Han, JaeGwan Kim, JaeHun choi
 #### BACK : MyoungJin Seo
 
 
@@ -26,5 +26,5 @@
 - MySQL
 
 ## Google stack
-- Google cloud Storage
+- Google Cloud Storage
 - Google Cloud Platform
