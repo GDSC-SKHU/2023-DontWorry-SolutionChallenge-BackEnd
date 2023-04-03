@@ -64,7 +64,7 @@ public class FileHandler {
                 String link = "https://storage.googleapis.com/"+ bucketName +"/"+ path +"/"+ new_file_name  ;
 
                 UploadFile uploadFile = UploadFile.builder()
-                        .uploadFileName(multipartFile.getOriginalFilename())
+                        .uploadFileName(blobInfo.getMediaLink())
                         .storeFileName(link)
                         .file_size(multipartFile.getSize())
 

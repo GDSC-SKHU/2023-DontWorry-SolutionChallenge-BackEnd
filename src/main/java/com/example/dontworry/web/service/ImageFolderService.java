@@ -5,6 +5,7 @@ import com.example.dontworry.domain.uploadFile.UploadFileRepository;
 import com.example.dontworry.domain.user.User;
 import com.example.dontworry.web.dto.ImageFolderResDto;
 import com.example.dontworry.web.dto.ImageFolderResDto;
+import com.example.dontworry.web.dto.ImageResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class ImageFolderService {
     public List<String> findByIncidentDate(User user1){
         List<LocalDate> localDates = postsRepository.findByIncidentDate(user1).orElseThrow();
         List<LocalDate> newList = localDates.stream().distinct().collect(Collectors.toList());
+
         List<String> formattedDates = new ArrayList<>();
         for(LocalDate  incidentDate : newList){
             String formattedDate = incidentDate.format(DateTimeFormatter.ofPattern("yy-MM"));
@@ -34,7 +36,7 @@ public class ImageFolderService {
         return formattedDates;
     }
 
-    public List<String> findByImages(Date incidentDate, User user){
+    public List<ImageResDto> findByImages(Date incidentDate, User user){
         return uploadFileRepository.findByImages(incidentDate,user).orElseThrow();
     }
 

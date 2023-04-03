@@ -1,6 +1,7 @@
 package com.example.dontworry.domain.uploadFile;
 
 import com.example.dontworry.domain.user.User;
+import com.example.dontworry.web.dto.ImageResDto;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -9,6 +10,6 @@ import java.util.Optional;
 
 public interface UploadFileRepositoryCustom {
 
-    Optional<List<String>> findByImages(Date incidentDate, User user);
+    Optional<List<ImageResDto>> findByImages(Date incidentDate, User user);
 
 }

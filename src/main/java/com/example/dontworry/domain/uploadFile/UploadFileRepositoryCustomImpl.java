@@ -1,6 +1,8 @@
 package com.example.dontworry.domain.uploadFile;
 
 import com.example.dontworry.domain.user.User;
+import com.example.dontworry.web.dto.ImageResDto;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -19,10 +21,10 @@ public class UploadFileRepositoryCustomImpl implements UploadFileRepositoryCusto
 
 
     @Override
-    public Optional<List<String>> findByImages(Date incidentDate, User user1){
+    public Optional<List<ImageResDto>> findByImages(Date incidentDate, User user1){
         return Optional.ofNullable(
                 jpaQueryFactory
-                        .select(uploadFile.storeFileName)
+                        .select(Projections.fields(ImageResDto.class,uploadFile.storeFileName,uploadFile.uploadFileName))
                         .from(uploadFile)
                         .leftJoin(uploadFile.posts,posts) .on(uploadFile.posts.id.eq(posts.id))
                         .where(posts.user.eq(user1)
