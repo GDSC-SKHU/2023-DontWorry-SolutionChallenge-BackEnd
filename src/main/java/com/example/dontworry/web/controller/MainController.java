@@ -34,7 +34,14 @@ public class MainController {
 
     @GetMapping("/main/title/{title}")
     public ResponseEntity<?> mainByTitle(@Login User user,@PathVariable String title){
+
         List<MainResDto> posts = postService.searchAllByIdAndTitle(user,title);
+
+        return ResponseEntity.ok().body(posts);
+    }
+    @GetMapping(value = {"/main/title","/main/category"})
+    public ResponseEntity<?> all(@Login User user){
+        List<MainResDto> posts = postService.findAllByUser(user);
         return ResponseEntity.ok().body(posts);
     }
 
