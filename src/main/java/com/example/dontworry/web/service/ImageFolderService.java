@@ -9,6 +9,7 @@ import com.example.dontworry.web.dto.ImageResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -37,7 +38,17 @@ public class ImageFolderService {
     }
 
     public List<ImageResDto> findByImages(Date incidentDate, User user){
-        return uploadFileRepository.findByImages(incidentDate,user).orElseThrow();
+        List<ImageResDto> imageResDtos = uploadFileRepository.findByImages(incidentDate, user).orElseThrow();
+        List<ImageResDto> result = new ArrayList<>();
+        for(ImageResDto i : imageResDtos){
+            ImageResDto imageResDto = ImageResDto.builder()
+                    .uploadFileName(i.getUploadFileName())
+                    .storeFileName(i.getStoreFileName())
+                    .build();
+            result.add(imageResDto);
+        }
+
+        return result;
     }
 
 
