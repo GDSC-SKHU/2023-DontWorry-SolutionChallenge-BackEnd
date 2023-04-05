@@ -41,7 +41,8 @@ public class ImageFolderService {
         List<ImageResDto> imageResDtos = uploadFileRepository.findByImages(incidentDate, user).orElseThrow();
         List<ImageResDto> result = new ArrayList<>();
         for(ImageResDto i : imageResDtos){
-            ImageResDto imageResDto = ImageResDto.builder()
+            ImageResDto imageResDto = new ImageResDto();
+            imageResDto = ImageResDto.builder()
                     .uploadFileName(i.getUploadFileName())
                     .storeFileName(i.getStoreFileName())
                     .build();
